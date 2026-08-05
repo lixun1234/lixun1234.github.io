@@ -1,0 +1,184 @@
+.md-main,
+.md-main__inner,
+.md-content,
+.md-content__inner {
+  background: #ffffff !important;
+}
+
+/* ---- 主页:蒙德里安几何导航 ---- */
+.mondrian-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: repeat(7, 1fr);
+  gap: 10px;
+  background: #000000;
+  border: 10px solid #000000;
+  box-sizing: border-box;
+  height: 78vh;
+  min-height: 520px;
+  margin: -1.4rem -1.4rem 0;
+}
+
+.mondrian-tile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  border-radius: 0;
+  background: #ffffff;
+  color: #111111;
+  transition: none;
+}
+
+.mondrian-tile:hover {
+  background: #000000 !important;
+  color: #ffffff !important;
+}
+
+.tile-label {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-indent: 0.3em;
+}
+
+.mondrian-tile.red {
+  background: #d42020;
+  color: #ffffff;
+  grid-area: 1 / 1 / 5 / 3;
+}
+
+.mondrian-tile.red .tile-label {
+  font-size: 2rem;
+}
+
+.mondrian-tile.blue {
+  background: #0341ae;
+  color: #ffffff;
+  grid-area: 1 / 4 / 3 / 5;
+}
+
+.mondrian-tile.yellow {
+  background: #f5c400;
+  color: #111111;
+  grid-area: 5 / 1 / 7 / 3;
+}
+
+.mondrian-tile.yellow .tile-label {
+  font-size: 1.6rem;
+}
+
+.mondrian-tile.white-link {
+  background: #ffffff;
+  color: #111111;
+  grid-area: 3 / 4 / 5 / 5;
+}
+
+.mondrian-tile.white {
+  grid-area: 5 / 3 / 7 / 5;
+}
+
+@media (max-width: 768px) {
+  .mondrian-grid {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(8, 1fr);
+    height: auto;
+    min-height: 90vh;
+  }
+
+  .mondrian-tile.red {
+    grid-area: 1 / 1 / 4 / 3;
+  }
+
+  .mondrian-tile.blue {
+    grid-area: 4 / 1 / 5 / 2;
+  }
+
+  .mondrian-tile.white-link {
+    grid-area: 4 / 2 / 5 / 3;
+  }
+
+  .mondrian-tile.yellow {
+    grid-area: 5 / 1 / 7 / 2;
+  }
+
+  .mondrian-tile.white {
+    grid-area: 5 / 2 / 7 / 3;
+  }
+}
+
+/* ---- 相册:单图居中 ---- */
+.photo-single {
+  margin: 1.5rem auto;
+  text-align: center;
+}
+
+.photo-single img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ---- 相册:多图并排 ---- */
+.photo-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.photo-grid.three {
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.photo-grid figure {
+  margin: 0;
+}
+
+.photo-grid img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  display: block;
+}
+
+.photo-grid figcaption {
+  margin-top: 0.4rem;
+  font-size: 0.85rem;
+  color: #666666;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .photo-grid,
+  .photo-grid.three {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---- 致好友寄语:宽松留白 ---- */
+.letter {
+  max-width: 34rem;
+  margin: 2rem auto;
+  padding: 2rem 1.5rem;
+  font-size: 1.1rem;
+  line-height: 2.4;
+  color: #333333;
+  text-align: justify;
+}
+
+.letter-head {
+  font-size: 1.15rem;
+  color: #111111;
+}
+
+.letter p {
+  margin: 1.2rem 0;
+}
+
+.letter-sign {
+  margin-top: 3rem;
+  text-align: right;
+  color: #888888;
+}
