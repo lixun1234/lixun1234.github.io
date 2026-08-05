@@ -1,0 +1,6 @@
+site/
+__pycache__/
+*.pyc
+serve-error.log
+serve.err.log
+serve.log
