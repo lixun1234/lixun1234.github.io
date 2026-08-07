@@ -5,14 +5,15 @@
   background: #ffffff !important;
 }
 
-/* ---- 主页:蒙德里安几何导航 ---- */
+/* ---- 主页:蒙德里安几何导航 ----
+   黑缝用固定宽度的空白轨道实现，因此不同位置的黑线宽度不同 */
 .mondrian-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-template-rows: repeat(7, 1fr);
-  gap: 10px;
+  grid-template-columns: 1.5fr 14px 1.7fr 18px 0.7fr 12px 0.6fr 22px 1.9fr;
+  grid-template-rows: 0.4fr 12px 0.3fr 16px 1.1fr 14px 1.0fr 18px 0.8fr 12px 1.3fr 20px 0.9fr;
+  gap: 0;
   background: #000000;
-  border: 10px solid #000000;
+  border: 20px solid #000000;
   box-sizing: border-box;
   height: 78vh;
   min-height: 520px;
@@ -27,41 +28,63 @@
   border-radius: 0;
   background: #ffffff;
   color: #111111;
-  transition: none;
 }
 
-.mondrian-tile:hover {
-  background: #000000 !important;
-  color: #ffffff !important;
+a.mondrian-tile {
+  transition: transform 0.25s ease;
+}
+
+a.mondrian-tile:hover {
+  transform: scale(1.03);
+  text-decoration: none;
+}
+
+a.mondrian-tile.red:hover,
+a.mondrian-tile.blue:hover {
+  color: #ffffff;
+}
+
+a.mondrian-tile.white-link:hover {
+  color: #111111;
+  background: #f2f2f2;
+}
+
+a.mondrian-tile.yellow:hover {
+  color: #111111;
 }
 
 .tile-label {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   font-weight: 700;
   letter-spacing: 0.3em;
   text-indent: 0.3em;
 }
 
+/* ---- 功能色块 ---- */
 .mondrian-tile.red {
   background: #d42020;
   color: #ffffff;
-  grid-area: 1 / 1 / 5 / 3;
+  grid-area: 1 / 1 / 10 / 4;
 }
 
 .mondrian-tile.red .tile-label {
-  font-size: 2rem;
+  font-size: 2.4rem;
 }
 
 .mondrian-tile.blue {
   background: #0341ae;
   color: #ffffff;
-  grid-area: 1 / 4 / 3 / 5;
+  grid-area: 1 / 9 / 6 / 10;
+}
+
+.mondrian-tile.blue .tile-label {
+  font-size: 2rem;
 }
 
 .mondrian-tile.yellow {
   background: #f5c400;
   color: #111111;
-  grid-area: 5 / 1 / 7 / 3;
+  grid-area: 5 / 5 / 10 / 8;
 }
 
 .mondrian-tile.yellow .tile-label {
@@ -71,17 +94,89 @@
 .mondrian-tile.white-link {
   background: #ffffff;
   color: #111111;
-  grid-area: 3 / 4 / 5 / 5;
+  grid-area: 11 / 1 / 14 / 2;
 }
 
-.mondrian-tile.white {
-  grid-area: 5 / 3 / 7 / 5;
+.mondrian-tile.white-link .tile-label {
+  font-size: 1.8rem;
+}
+
+/* ---- 文字色块 ---- */
+.mondrian-tile.red-text {
+  background: #ffffff;
+  color: #111111;
+  grid-area: 11 / 3 / 14 / 8;
+}
+
+.mondrian-tile.red-text .tile-text {
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  line-height: 1.9;
+  text-align: center;
+}
+
+/* ---- 装饰白条 ---- */
+.mondrian-tile.strip-a {
+  grid-area: 1 / 5 / 2 / 6;
+  animation: pulse-soft 3.5s ease-in-out infinite;
+}
+
+.mondrian-tile.strip-b {
+  grid-area: 3 / 5 / 4 / 6;
+  animation: pulse-soft 3.5s ease-in-out 1.2s infinite;
+}
+
+.mondrian-tile.strip-d1 {
+  grid-area: 1 / 7 / 2 / 8;
+  animation: pulse-soft 3.5s ease-in-out 1.8s infinite;
+}
+
+.mondrian-tile.strip-d2 {
+  grid-area: 3 / 7 / 4 / 8;
+  animation: pulse-soft 3.5s ease-in-out 2.4s infinite;
+}
+
+@keyframes pulse-soft {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+/* ---- 最右:白色横版日期块 ---- */
+.mondrian-tile.side-block {
+  grid-area: 7 / 9 / 14 / 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.side-block .tile-date {
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: #111111;
+  letter-spacing: 0.06em;
+}
+
+.side-block .tile-sub {
+  font-size: 1rem;
+  color: #888888;
+  letter-spacing: 0.35em;
+  text-indent: 0.35em;
 }
 
 @media (max-width: 768px) {
   .mondrian-grid {
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: repeat(8, 1fr);
+    grid-template-rows: repeat(7, 1fr);
+    gap: 12px;
+    border: 12px solid #000000;
     height: auto;
     min-height: 90vh;
   }
@@ -91,19 +186,36 @@
   }
 
   .mondrian-tile.blue {
-    grid-area: 4 / 1 / 5 / 2;
-  }
-
-  .mondrian-tile.white-link {
-    grid-area: 4 / 2 / 5 / 3;
+    grid-area: 4 / 1 / 5 / 3;
   }
 
   .mondrian-tile.yellow {
-    grid-area: 5 / 1 / 7 / 2;
+    grid-area: 5 / 1 / 6 / 3;
   }
 
-  .mondrian-tile.white {
-    grid-area: 5 / 2 / 7 / 3;
+  .mondrian-tile.white-link {
+    grid-area: 6 / 1 / 7 / 3;
+  }
+
+  .mondrian-tile.red-text {
+    grid-area: 7 / 1 / 8 / 2;
+  }
+
+  .mondrian-tile.side-block {
+    grid-area: 7 / 2 / 8 / 3;
+  }
+
+  .mondrian-tile.red .tile-label,
+  .mondrian-tile.blue .tile-label,
+  .mondrian-tile.white-link .tile-label {
+    font-size: 1.5rem;
+  }
+
+  .mondrian-tile.strip-a,
+  .mondrian-tile.strip-b,
+  .mondrian-tile.strip-d1,
+  .mondrian-tile.strip-d2 {
+    display: none;
   }
 }
 
@@ -181,4 +293,360 @@
   margin-top: 3rem;
   text-align: right;
   color: #888888;
+}
+
+/* ---- 欢迎页:全屏背景 + 艺术字 ---- */
+.welcome-page {
+  position: relative;
+  height: 100vh;
+  min-height: 560px;
+  margin: -1.4rem -1.4rem 0;
+  overflow: hidden;
+  background: #0d0d10;
+}
+
+.welcome-bg {
+  position: absolute;
+  inset: 0;
+  background: url("../images/welcome/bg.svg") center / cover no-repeat;
+}
+
+.welcome-page.welcome-leaving {
+  animation: welcome-fade 0.6s ease forwards;
+}
+
+@keyframes welcome-fade {
+  to {
+    opacity: 0;
+    transform: scale(1.04);
+  }
+}
+
+.welcome-content {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2.2rem;
+  text-align: center;
+}
+
+.welcome-title {
+  margin: 0;
+  font-size: clamp(2.2rem, 6vw, 4.6rem);
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  line-height: 1.25;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+.welcome-char {
+  display: inline-block;
+  white-space: pre;
+  background: linear-gradient(100deg, #ffffff 0%, #f5c400 25%, #d42020 50%, #0341ae 75%, #ffffff 100%);
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation:
+    welcome-float 3.2s ease-in-out var(--d, 0s) infinite,
+    welcome-hue 10s linear infinite;
+}
+
+@keyframes welcome-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-0.35em);
+  }
+}
+
+@keyframes welcome-hue {
+  from {
+    background-position: 0% 50%;
+  }
+  to {
+    background-position: 300% 50%;
+  }
+}
+
+.welcome-sub {
+  margin: 0;
+  font-size: clamp(0.9rem, 2vw, 1.15rem);
+  letter-spacing: 0.6em;
+  text-indent: 0.6em;
+  color: rgba(255, 255, 255, 0.75);
+  animation: welcome-fade-in 1.2s ease 1s both;
+}
+
+.welcome-enter {
+  margin-top: 1rem;
+  padding: 0.9rem 3.2rem;
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.5em;
+  text-indent: 0.5em;
+  color: #ffffff;
+  background: rgba(17, 17, 17, 0.55);
+  border: 2px solid #ffffff;
+  cursor: pointer;
+  text-decoration: none;
+  animation:
+    welcome-fade-in 1.2s ease 1.6s both,
+    welcome-pulse 2.4s ease-in-out 2.6s infinite;
+}
+
+.welcome-enter:hover {
+  background: #ffffff;
+  color: #111111;
+}
+
+@keyframes welcome-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.8rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes welcome-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.45);
+  }
+  50% {
+    box-shadow: 0 0 0 14px rgba(255, 255, 255, 0);
+  }
+}
+
+.welcome-hint {
+  position: absolute;
+  bottom: 1.4rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  color: rgba(255, 255, 255, 0.55);
+  animation: welcome-fade-in 1.2s ease 2.4s both;
+}
+
+.welcome-arrow {
+  display: block;
+  font-size: 1.6rem;
+  animation: welcome-bounce 1.6s ease-in-out infinite;
+}
+
+@keyframes welcome-bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(0.5rem);
+  }
+}
+
+@media (max-width: 768px) {
+  .welcome-page {
+    margin: -1.4rem -1.4rem 0;
+  }
+
+  .welcome-title {
+    letter-spacing: 0.08em;
+  }
+}
+
+/* ---- 主页:仅显示方块图,隐藏返回顶部按钮 ---- */
+body.home-page .md-top {
+  display: none;
+}
+
+/* ---- 主页:方块图在页面中水平垂直居中 ---- */
+body.home-page .md-content__inner {
+  display: flex;
+  min-height: 100vh;
+}
+
+body.home-page .mondrian-grid {
+  margin: auto;
+  width: 100%;
+  max-width: 1200px;
+}
+
+/* ---- 全局隐藏顶部栏(欢迎页/主页/板块页面均不显示顶栏) ---- */
+.md-header {
+  display: none;
+}
+
+/* ---- 搜索栏:正常状态下隐藏,悬停搜索区域时显示 ---- */
+.md-search__form {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.md-search:hover .md-search__form,
+.md-search:focus-within .md-search__form {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ---- 留言板 ---- */
+.guestbook {
+  max-width: 40rem;
+  margin: 2rem auto;
+}
+
+.guestbook-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  padding: 1.4rem;
+  background: #ffffff;
+  border: 4px solid #111111;
+}
+
+.guestbook-form input,
+.guestbook-form textarea {
+  font: inherit;
+  padding: 0.7rem 0.9rem;
+  border: 2px solid #111111;
+  border-radius: 0;
+  background: #ffffff;
+  color: #111111;
+  resize: vertical;
+}
+
+.guestbook-form input:focus,
+.guestbook-form textarea:focus {
+  outline: none;
+  border-color: #d42020;
+}
+
+.guestbook-submit {
+  align-self: flex-end;
+  padding: 0.7rem 2.2rem;
+  font: inherit;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-indent: 0.3em;
+  color: #ffffff;
+  background: #111111;
+  border: 2px solid #111111;
+  cursor: pointer;
+}
+
+.guestbook-submit:hover {
+  background: #ffffff;
+  color: #111111;
+}
+
+.guestbook-list {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.guestbook-empty {
+  padding: 2rem;
+  text-align: center;
+  color: #888888;
+  border: 2px dashed #cccccc;
+}
+
+.guestbook-card {
+  padding: 1rem 1.2rem;
+  background: #ffffff;
+  border: 3px solid #111111;
+  border-top-width: 10px;
+}
+
+.guestbook-card.red {
+  border-top-color: #d42020;
+}
+
+.guestbook-card.blue {
+  border-top-color: #0341ae;
+}
+
+.guestbook-card.yellow {
+  border-top-color: #f5c400;
+}
+
+.guestbook-card-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.guestbook-card-name {
+  font-weight: 700;
+  color: #111111;
+}
+
+.guestbook-card-time {
+  font-size: 0.8rem;
+  color: #888888;
+}
+
+.guestbook-card-text {
+  color: #333333;
+  line-height: 1.7;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* ---- 顶部导航：隐藏式 + 蒙德里安风格 ----
+   配合 mkdocs.yml 中 header.autohide：向下滚动隐藏，向上滚动显示 */
+.md-header {
+  background: #000000;
+  color: #ffffff;
+  box-shadow: none;
+}
+
+.md-header__title {
+  color: #ffffff;
+  font-weight: 900;
+  letter-spacing: 0.18em;
+  text-indent: 0.18em;
+}
+
+.md-header__topic {
+  color: #ffffff;
+}
+
+.md-header__button {
+  color: #ffffff;
+}
+
+.md-header__button:hover {
+  color: #ffffff;
+  opacity: 0.75;
+}
+
+.md-logo {
+  margin: 0.3rem 0.4rem 0.3rem 0.3rem;
+  padding: 0.35rem;
+  background: #d42020;
+  color: #ffffff;
+}
+
+/* 全局强调色改为蒙德里安红 */
+:root {
+  --md-accent-fg-color: #d42020;
+  --md-accent-fg-color--transparent: rgba(212, 32, 32, 0.12);
+  --md-accent-bg-color: #d42020;
+  --md-accent-bg-color--transparent: rgba(212, 32, 32, 0.9);
 }
