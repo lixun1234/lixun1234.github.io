@@ -8,6 +8,7 @@ theme:
     scheme: default
     primary: white
   features:
+    - header.autohide
     - navigation.top
     - navigation.footer
 
@@ -28,8 +29,14 @@ plugins:
 extra_css:
   - stylesheets/extra.css
 
+extra_javascript:
+  - javascripts/welcome.js
+  - javascripts/guestbook.js
+  - javascripts/header.js
+
 nav:
-  - 主页: index.md
+  - 主页: home.md
   - 我的相册: photo/me.md
   - 好友相册: photo/friend.md
   - 致好友寄语: message/to_friend.md
+  - 留言板: message/guestbook.md

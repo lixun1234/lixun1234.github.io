@@ -4,3 +4,4 @@ __pycache__/
 serve-error.log
 serve.err.log
 serve.log
+serve*.log
