@@ -34,4 +34,3 @@ extra_javascript:
 
 nav:
   - 主页: index.md
-  - 致好友寄语: message/to_friend.md
