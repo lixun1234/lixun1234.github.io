@@ -1,417 +1,128 @@
+/* ============================================================
+   奶油极简治愈风 · 主页 + 寄语模块
+   主色：#FFFBF5 奶白   辅色：#F8C4C4 低饱和暖粉   文字：#333333 深灰
+   设计原则：全圆角 · 大留白 · 柔和缓动 · 移动端优先
+   ============================================================ */
+
+:root {
+  --cream: #FFFBF5;
+  --pink: #F8C4C4;
+  --pink-deep: #EFA9A9;
+  --text: #333333;
+  --muted: #9A8F86;
+  --md-default-bg-color: #FFFBF5;
+  --md-default-fg-color: #333333;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+body {
+  background: var(--cream);
+  font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", sans-serif;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ---- 隐藏 Material 系统元素：顶栏 / 目录 / 页脚 ---- */
+.md-header,
+.md-top,
+.md-footer,
+.md-sidebar,
+.md-nav {
+  display: none !important;
+}
+
 .md-main,
 .md-main__inner,
 .md-content,
-.md-content__inner {
-  background: #ffffff !important;
+.md-content__inner,
+.md-grid {
+  margin: 0 !important;
+  padding: 0 !important;
+  max-width: none !important;
+  background: transparent;
 }
 
-/* ---- 主页:蒙德里安几何导航 ----
-   黑缝用固定宽度的空白轨道实现，因此不同位置的黑线宽度不同 */
-.mondrian-grid {
-  display: grid;
-  grid-template-columns: 1.5fr 14px 1.7fr 18px 0.7fr 12px 0.6fr 22px 1.9fr;
-  grid-template-rows: 0.4fr 12px 0.3fr 16px 1.1fr 14px 1.0fr 18px 0.8fr 12px 1.3fr 20px 0.9fr;
-  gap: 0;
-  background: #000000;
-  border: 20px solid #000000;
+/* ============================================================
+   主页：一屏高度，内容垂直水平居中
+   ============================================================ */
+.home {
+  position: relative;
   box-sizing: border-box;
-  height: 78vh;
-  min-height: 520px;
-  margin: -1.4rem -1.4rem 0;
-}
-
-.mondrian-tile {
+  min-height: 100vh;
+  min-height: 100svh;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  text-decoration: none;
-  border-radius: 0;
-  background: #ffffff;
-  color: #111111;
+  text-align: center;
+  padding: 4rem 1.5rem;
+  background: var(--cream);
 }
 
-a.mondrian-tile {
-  transition: transform 0.25s ease;
-}
-
-a.mondrian-tile:hover {
-  transform: scale(1.03);
-  text-decoration: none;
-}
-
-a.mondrian-tile.red:hover,
-a.mondrian-tile.blue:hover {
-  color: #ffffff;
-}
-
-a.mondrian-tile.white-link:hover {
-  color: #111111;
-  background: #f2f2f2;
-}
-
-a.mondrian-tile.yellow:hover {
-  color: #111111;
-}
-
-.tile-label {
-  font-size: 1.4rem;
-  font-weight: 700;
+/* 主文案：字号最大，字体柔和，打字机逐字显现 */
+.home-title {
+  margin: 0;
+  font-family: "Yuanti SC", "STYuanti", "YouYuan", "PingFang SC", sans-serif;
+  font-size: clamp(3rem, 12vw, 5rem);
+  font-weight: 600;
   letter-spacing: 0.3em;
   text-indent: 0.3em;
+  line-height: 1.5;
+  color: var(--text);
+  white-space: nowrap;
 }
 
-/* ---- 功能色块 ---- */
-.mondrian-tile.red {
-  background: #d42020;
-  color: #ffffff;
-  grid-area: 1 / 1 / 10 / 4;
-}
-
-.mondrian-tile.red .tile-label {
-  font-size: 2.4rem;
-}
-
-.mondrian-tile.blue {
-  background: #0341ae;
-  color: #ffffff;
-  grid-area: 1 / 9 / 6 / 10;
-}
-
-.mondrian-tile.blue .tile-label {
-  font-size: 2rem;
-}
-
-.mondrian-tile.yellow {
-  background: #f5c400;
-  color: #111111;
-  grid-area: 5 / 5 / 10 / 8;
-}
-
-.mondrian-tile.yellow .tile-label {
-  font-size: 1.6rem;
-}
-
-.mondrian-tile.white-link {
-  background: #ffffff;
-  color: #111111;
-  grid-area: 11 / 1 / 14 / 2;
-}
-
-.mondrian-tile.white-link .tile-label {
-  font-size: 1.8rem;
-}
-
-/* ---- 文字色块 ---- */
-.mondrian-tile.red-text {
-  background: #ffffff;
-  color: #111111;
-  grid-area: 11 / 3 / 14 / 8;
-}
-
-.mondrian-tile.red-text .tile-text {
-  font-size: 1.2rem;
-  font-weight: 700;
-  letter-spacing: 0.15em;
-  line-height: 1.9;
-  text-align: center;
-}
-
-/* ---- 装饰白条 ---- */
-.mondrian-tile.strip-a {
-  grid-area: 1 / 5 / 2 / 6;
-  animation: pulse-soft 3.5s ease-in-out infinite;
-}
-
-.mondrian-tile.strip-b {
-  grid-area: 3 / 5 / 4 / 6;
-  animation: pulse-soft 3.5s ease-in-out 1.2s infinite;
-}
-
-.mondrian-tile.strip-d1 {
-  grid-area: 1 / 7 / 2 / 8;
-  animation: pulse-soft 3.5s ease-in-out 1.8s infinite;
-}
-
-.mondrian-tile.strip-d2 {
-  grid-area: 3 / 7 / 4 / 8;
-  animation: pulse-soft 3.5s ease-in-out 2.4s infinite;
-}
-
-@keyframes pulse-soft {
-  0%,
-  100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.05);
-  }
-}
-
-/* ---- 最右:白色横版日期块 ---- */
-.mondrian-tile.side-block {
-  grid-area: 7 / 9 / 14 / 10;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-}
-
-.side-block .tile-date {
-  font-size: 2.2rem;
-  font-weight: 900;
-  color: #111111;
-  letter-spacing: 0.06em;
-}
-
-.side-block .tile-sub {
-  font-size: 1rem;
-  color: #888888;
-  letter-spacing: 0.35em;
-  text-indent: 0.35em;
-}
-
-@media (max-width: 768px) {
-  .mondrian-grid {
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: repeat(7, 1fr);
-    gap: 12px;
-    border: 12px solid #000000;
-    height: auto;
-    min-height: 90vh;
-  }
-
-  .mondrian-tile.red {
-    grid-area: 1 / 1 / 4 / 3;
-  }
-
-  .mondrian-tile.blue {
-    grid-area: 4 / 1 / 5 / 3;
-  }
-
-  .mondrian-tile.yellow {
-    grid-area: 5 / 1 / 6 / 3;
-  }
-
-  .mondrian-tile.white-link {
-    grid-area: 6 / 1 / 7 / 3;
-  }
-
-  .mondrian-tile.red-text {
-    grid-area: 7 / 1 / 8 / 2;
-  }
-
-  .mondrian-tile.side-block {
-    grid-area: 7 / 2 / 8 / 3;
-  }
-
-  .mondrian-tile.red .tile-label,
-  .mondrian-tile.blue .tile-label,
-  .mondrian-tile.white-link .tile-label {
-    font-size: 1.5rem;
-  }
-
-  .mondrian-tile.strip-a,
-  .mondrian-tile.strip-b,
-  .mondrian-tile.strip-d1,
-  .mondrian-tile.strip-d2 {
-    display: none;
-  }
-}
-
-/* ---- 相册:单图居中 ---- */
-.photo-single {
-  margin: 1.5rem auto;
-  text-align: center;
-}
-
-.photo-single img {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
-/* ---- 相册:多图并排 ---- */
-.photo-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-  margin: 1.5rem 0;
-}
-
-.photo-grid.three {
-  grid-template-columns: 1fr 1fr 1fr;
-}
-
-.photo-grid figure {
-  margin: 0;
-}
-
-.photo-grid img {
-  width: 100%;
-  height: auto;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
-  display: block;
-}
-
-.photo-grid figcaption {
-  margin-top: 0.4rem;
-  font-size: 0.85rem;
-  color: #666666;
-  text-align: center;
-}
-
-@media (max-width: 768px) {
-  .photo-grid,
-  .photo-grid.three {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* ---- 致好友寄语:宽松留白 ---- */
-.letter {
-  max-width: 34rem;
-  margin: 2rem auto;
-  padding: 2rem 1.5rem;
-  font-size: 1.1rem;
-  line-height: 2.4;
-  color: #333333;
-  text-align: justify;
-}
-
-.letter-head {
-  font-size: 1.15rem;
-  color: #111111;
-}
-
-.letter p {
-  margin: 1.2rem 0;
-}
-
-.letter-sign {
-  margin-top: 3rem;
-  text-align: right;
-  color: #888888;
-}
-
-/* ---- 欢迎页:全屏背景 + 艺术字 ---- */
-.welcome-page {
-  position: relative;
-  height: 100vh;
-  min-height: 560px;
-  margin: -1.4rem -1.4rem 0;
-  overflow: hidden;
-  background: #0d0d10;
-}
-
-.welcome-bg {
-  position: absolute;
-  inset: 0;
-  background: url("../images/welcome/bg.svg") center / cover no-repeat;
-}
-
-.welcome-page.welcome-leaving {
-  animation: welcome-fade 0.6s ease forwards;
-}
-
-@keyframes welcome-fade {
-  to {
-    opacity: 0;
-    transform: scale(1.04);
-  }
-}
-
-.welcome-content {
-  position: relative;
-  z-index: 2;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 2.2rem;
-  text-align: center;
-}
-
-.welcome-title {
-  margin: 0;
-  font-size: clamp(2.2rem, 6vw, 4.6rem);
-  font-weight: 900;
-  letter-spacing: 0.12em;
-  line-height: 1.25;
-  color: transparent;
-  -webkit-background-clip: text;
-  background-clip: text;
-}
-
-.welcome-char {
+/* 打字机光标 */
+.home-title .caret {
   display: inline-block;
-  white-space: pre;
-  background: linear-gradient(100deg, #ffffff 0%, #f5c400 25%, #d42020 50%, #0341ae 75%, #ffffff 100%);
-  background-size: 300% 100%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  animation:
-    welcome-float 3.2s ease-in-out var(--d, 0s) infinite,
-    welcome-hue 10s linear infinite;
+  width: 3px;
+  height: 0.92em;
+  margin-left: 0.08em;
+  vertical-align: baseline;
+  transform: translateY(0.1em);
+  background: var(--pink);
+  border-radius: 3px;
+  animation: caret-blink 1s steps(1) infinite;
 }
 
-@keyframes welcome-float {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
+@keyframes caret-blink {
   50% {
-    transform: translateY(-0.35em);
+    opacity: 0;
   }
 }
 
-@keyframes welcome-hue {
-  from {
-    background-position: 0% 50%;
-  }
-  to {
-    background-position: 300% 50%;
-  }
+/* 副文案：依次延迟 0.5s 淡入并轻微向上浮动 */
+.home-sub {
+  margin: 0.4rem 0 0;
+  font-size: clamp(1rem, 3.6vw, 1.35rem);
+  letter-spacing: 0.18em;
+  text-indent: 0.18em;
+  line-height: 2;
+  color: var(--text);
+  opacity: 0;
+  animation: sub-rise 0.7s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
 }
 
-.welcome-sub {
-  margin: 0;
-  font-size: clamp(0.9rem, 2vw, 1.15rem);
-  letter-spacing: 0.6em;
-  text-indent: 0.6em;
-  color: rgba(255, 255, 255, 0.75);
-  animation: welcome-fade-in 1.2s ease 1s both;
+.sub-1 {
+  animation-delay: 0.5s;
 }
 
-.welcome-enter {
-  margin-top: 1rem;
-  padding: 0.9rem 3.2rem;
-  font-size: 1.05rem;
-  font-weight: 700;
-  letter-spacing: 0.5em;
-  text-indent: 0.5em;
-  color: #ffffff;
-  background: rgba(17, 17, 17, 0.55);
-  border: 2px solid #ffffff;
-  cursor: pointer;
-  text-decoration: none;
-  animation:
-    welcome-fade-in 1.2s ease 1.6s both,
-    welcome-pulse 2.4s ease-in-out 2.6s infinite;
+.sub-2 {
+  animation-delay: 1s;
 }
 
-.welcome-enter:hover {
-  background: #ffffff;
-  color: #111111;
-}
-
-@keyframes welcome-fade-in {
+@keyframes sub-rise {
   from {
     opacity: 0;
-    transform: translateY(0.8rem);
+    transform: translateY(14px);
   }
   to {
     opacity: 1;
@@ -419,234 +130,176 @@ a.mondrian-tile.yellow:hover {
   }
 }
 
-@keyframes welcome-pulse {
-  0%,
-  100% {
-    box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.45);
-  }
-  50% {
-    box-shadow: 0 0 0 14px rgba(255, 255, 255, 0);
-  }
-}
-
-.welcome-hint {
+/* 跳转按钮：胶囊型，位于页面下方三分之一处 */
+.home-enter {
   position: absolute;
-  bottom: 1.4rem;
   left: 50%;
+  bottom: 22%;
   transform: translateX(-50%);
-  z-index: 2;
-  color: rgba(255, 255, 255, 0.55);
-  animation: welcome-fade-in 1.2s ease 2.4s both;
-}
-
-.welcome-arrow {
-  display: block;
-  font-size: 1.6rem;
-  animation: welcome-bounce 1.6s ease-in-out infinite;
-}
-
-@keyframes welcome-bounce {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(0.5rem);
-  }
-}
-
-@media (max-width: 768px) {
-  .welcome-page {
-    margin: -1.4rem -1.4rem 0;
-  }
-
-  .welcome-title {
-    letter-spacing: 0.08em;
-  }
-}
-
-/* ---- 主页:仅显示方块图,隐藏返回顶部按钮 ---- */
-body.home-page .md-top {
-  display: none;
-}
-
-/* ---- 主页:方块图在页面中水平垂直居中 ---- */
-body.home-page .md-content__inner {
-  display: flex;
-  min-height: 100vh;
-}
-
-body.home-page .mondrian-grid {
-  margin: auto;
-  width: 100%;
-  max-width: 1200px;
-}
-
-/* ---- 全局隐藏顶部栏(欢迎页/主页/板块页面均不显示顶栏) ---- */
-.md-header {
-  display: none;
-}
-
-/* ---- 搜索栏:正常状态下隐藏,悬停搜索区域时显示 ---- */
-.md-search__form {
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.2s ease;
-}
-
-.md-search:hover .md-search__form,
-.md-search:focus-within .md-search__form {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-/* ---- 留言板 ---- */
-.guestbook {
-  max-width: 40rem;
-  margin: 2rem auto;
-}
-
-.guestbook-form {
-  display: flex;
-  flex-direction: column;
-  gap: 0.9rem;
-  padding: 1.4rem;
-  background: #ffffff;
-  border: 4px solid #111111;
-}
-
-.guestbook-form input,
-.guestbook-form textarea {
-  font: inherit;
-  padding: 0.7rem 0.9rem;
-  border: 2px solid #111111;
-  border-radius: 0;
-  background: #ffffff;
-  color: #111111;
-  resize: vertical;
-}
-
-.guestbook-form input:focus,
-.guestbook-form textarea:focus {
-  outline: none;
-  border-color: #d42020;
-}
-
-.guestbook-submit {
-  align-self: flex-end;
-  padding: 0.7rem 2.2rem;
-  font: inherit;
-  font-weight: 700;
-  letter-spacing: 0.3em;
-  text-indent: 0.3em;
+  padding: 1rem 3.4rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  text-indent: 0.25em;
   color: #ffffff;
-  background: #111111;
-  border: 2px solid #111111;
+  background: var(--pink);
+  border: none;
+  border-radius: 999px;
+  text-decoration: none;
   cursor: pointer;
+  box-shadow: 0 12px 28px rgba(248, 196, 196, 0.5);
+  opacity: 0;
+  animation: btn-fade 0.7s ease 1.3s forwards;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    background 0.3s ease;
+  -webkit-tap-highlight-color: transparent;
 }
 
-.guestbook-submit:hover {
-  background: #ffffff;
-  color: #111111;
+@keyframes btn-fade {
+  to {
+    opacity: 1;
+  }
 }
 
-.guestbook-list {
-  margin-top: 2rem;
+.home-enter:hover {
+  background: var(--pink-deep);
+  box-shadow: 0 16px 34px rgba(248, 196, 196, 0.6);
+}
+
+/* 点击：轻微缩放反馈 */
+.home-enter:active {
+  transform: translateX(-50%) scale(0.94);
+  box-shadow: 0 8px 18px rgba(248, 196, 196, 0.45);
+}
+
+/* ============================================================
+   寄语模块：一屏高度，可设置背景图
+   ※ 背景图替换位置：下方 .message-section 的 background 属性，
+     把 url("../images/letter/bg.svg") 换成你自己的图片路径即可
+     （支持 jpg / png / svg，建议使用低饱和柔光纹理图）
+   ============================================================ */
+.message-section {
+  position: relative;
+  box-sizing: border-box;
+  min-height: 100vh;
+  min-height: 100svh;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+  padding: 5rem 1.5rem 4rem;
+  /* ↓↓↓↓ 背景图替换位置：修改 url(...) 中的路径即可 ↓↓↓↓ */
+  background: url("../images/letter/bg.svg") center / cover no-repeat;
+  /* ↑↑↑↑ 背景图替换位置 ↑↑↑↑ */
+  background-color: #f7efe9;
 }
 
-.guestbook-empty {
-  padding: 2rem;
-  text-align: center;
-  color: #888888;
-  border: 2px dashed #cccccc;
+/* 返回按钮：左上角文字按钮 */
+.msg-back {
+  position: absolute;
+  top: 1.6rem;
+  left: 1.6rem;
+  padding: 0.55rem 1.1rem;
+  font-size: 0.95rem;
+  letter-spacing: 0.12em;
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 999px;
+  text-decoration: none;
+  transition:
+    background 0.3s ease,
+    transform 0.3s ease;
+  -webkit-tap-highlight-color: transparent;
 }
 
-.guestbook-card {
-  padding: 1rem 1.2rem;
-  background: #ffffff;
-  border: 3px solid #111111;
-  border-top-width: 10px;
+.msg-back:hover {
+  background: rgba(255, 255, 255, 0.85);
 }
 
-.guestbook-card.red {
-  border-top-color: #d42020;
+.msg-back:active {
+  transform: scale(0.94);
 }
 
-.guestbook-card.blue {
-  border-top-color: #0341ae;
+/* 磨砂玻璃卡片：寄语正文 */
+.msg-card {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 38rem;
+  padding: 2.8rem 2.6rem;
+  font-size: 1.02rem;
+  line-height: 2.3;
+  color: var(--text);
+  text-align: justify;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-radius: 28px;
+  box-shadow: 0 20px 50px rgba(51, 51, 51, 0.1);
+  opacity: 0;
+  transform: translateY(26px);
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s ease;
 }
 
-.guestbook-card.yellow {
-  border-top-color: #f5c400;
+.msg-card.in-view {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-.guestbook-card-head {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 1rem;
-  margin-bottom: 0.5rem;
+.msg-head {
+  margin: 0 0 1rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: var(--text);
 }
 
-.guestbook-card-name {
-  font-weight: 700;
-  color: #111111;
+.msg-card p {
+  margin: 1.1rem 0;
 }
 
-.guestbook-card-time {
-  font-size: 0.8rem;
-  color: #888888;
+.msg-sign {
+  margin-top: 2.4rem !important;
+  text-align: right;
+  letter-spacing: 0.05em;
+  color: var(--muted);
 }
 
-.guestbook-card-text {
-  color: #333333;
-  line-height: 1.7;
-  white-space: pre-wrap;
-  word-break: break-word;
+/* ============================================================
+   移动端适配
+   ============================================================ */
+@media (max-width: 480px) {
+  .home {
+    padding: 4rem 1.2rem;
+  }
+
+  .home-enter {
+    bottom: 18%;
+    padding: 0.95rem 2.9rem;
+    font-size: 1rem;
+  }
+
+  .msg-card {
+    padding: 2.2rem 1.6rem;
+    font-size: 0.98rem;
+    line-height: 2.2;
+  }
+
+  .msg-back {
+    top: 1.1rem;
+    left: 1.1rem;
+  }
 }
 
-/* ---- 顶部导航：隐藏式 + 蒙德里安风格 ----
-   配合 mkdocs.yml 中 header.autohide：向下滚动隐藏，向上滚动显示 */
-.md-header {
-  background: #000000;
-  color: #ffffff;
-  box-shadow: none;
-}
-
-.md-header__title {
-  color: #ffffff;
-  font-weight: 900;
-  letter-spacing: 0.18em;
-  text-indent: 0.18em;
-}
-
-.md-header__topic {
-  color: #ffffff;
-}
-
-.md-header__button {
-  color: #ffffff;
-}
-
-.md-header__button:hover {
-  color: #ffffff;
-  opacity: 0.75;
-}
-
-.md-logo {
-  margin: 0.3rem 0.4rem 0.3rem 0.3rem;
-  padding: 0.35rem;
-  background: #d42020;
-  color: #ffffff;
-}
-
-/* 全局强调色改为蒙德里安红 */
-:root {
-  --md-accent-fg-color: #d42020;
-  --md-accent-fg-color--transparent: rgba(212, 32, 32, 0.12);
-  --md-accent-bg-color: #d42020;
-  --md-accent-bg-color--transparent: rgba(212, 32, 32, 0.9);
+/* 矮屏（横屏等）：按钮改为跟随内容，避免与居中文字重叠 */
+@media (max-height: 520px) {
+  .home-enter {
+    position: static;
+    margin-top: 3.2rem;
+  }
 }

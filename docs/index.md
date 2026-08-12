@@ -5,22 +5,46 @@ hide:
   - footer
 ---
 
-<div class="welcome-page">
+<!-- ============================================================
+     主页：占满一屏，内容垂直水平居中
+     ============================================================ -->
+<div class="home" id="home">
 
-  <div class="welcome-bg"></div>
+  <!-- 主文案：「生日快乐」，打字机效果逐字显现（文字直接改这里） -->
+  <h1 class="home-title" id="home-title">生日快乐</h1>
 
-  <div class="welcome-content">
-    <!--
-      艺术字：直接修改下面这个标题里的文字即可（例如改成你喜欢的日期/昵称）。
-      背景图：把 docs/images/welcome/bg.svg 换成你自己的图片即可（支持 jpg/png），保持文件名不变。
-    -->
-    <h1 class="welcome-title" id="welcome-title">2026.8.15 TO Lsh</h1>
+  <!-- 副文案：依次延迟 0.5s 淡入并轻微上浮 -->
+  <p class="home-sub sub-1">岁岁常欢愉，万事皆胜意</p>
+  <p class="home-sub sub-2">愿所有美好都如期而至</p>
 
-    <p class="welcome-sub">欢迎来到我的小站</p>
+  <!-- 按钮：点击后平滑滚动到下方寄语模块 -->
+  <a class="home-enter" href="#message">查看寄语</a>
 
-    <a class="welcome-enter" href="home/" id="welcome-enter">点击进入</a>
+</div>
+
+<!-- ============================================================
+     寄语模块：占满一屏，支持背景图
+     背景图替换位置见 docs/stylesheets/extra.css 中
+     .message-section 的 background 属性（有醒目注释标注）
+     ============================================================ -->
+<div class="message-section" id="message">
+
+  <!-- 返回按钮：点击后平滑滚动回主页 -->
+  <a class="msg-back" href="#home">← 返回</a>
+
+  <!-- 磨砂玻璃卡片：寄语正文在此编辑（可继续添加多行 <p>） -->
+  <div class="msg-card">
+    <p class="msg-head">亲爱的朋友：</p>
+
+    <p>写下这段话的时候，我想起的全是那些在一起的日子。</p>
+
+    <p>也许我们很久没有见面，也许我们各自在忙各自的生活，但只要翻开相册，一切就好像还在昨天。</p>
+
+    <p>感谢你的陪伴。无论走得多远，这里永远有一页属于你。</p>
+
+    <p>愿你岁岁常欢愉，万事皆胜意；愿所有美好，都如期而至。</p>
+
+    <p class="msg-sign">—— 2026.8.15</p>
   </div>
-
-    <div class="welcome-hint"><span class="welcome-arrow">↓</span></div>
 
 </div>
