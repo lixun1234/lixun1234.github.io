@@ -4,6 +4,7 @@ site_description: 一个用 MkDocs 搭建的个人网站
 theme:
   name: material
   language: zh
+  custom_dir: overrides
   palette:
     scheme: default
     primary: white

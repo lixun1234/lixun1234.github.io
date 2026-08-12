@@ -12,10 +12,12 @@
   --muted: #9A8F86;
   --md-default-bg-color: #FFFBF5;
   --md-default-fg-color: #333333;
+  color-scheme: light;
 }
 
 html {
   scroll-behavior: smooth;
+  background: var(--cream);
 }
 
 html,
