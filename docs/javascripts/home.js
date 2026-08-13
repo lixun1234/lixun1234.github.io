@@ -13,11 +13,30 @@
     caret.className = "caret";
     var typed = 0;
     titleEl.textContent = "";
+
+    /* 打字完成后：每个字包成 span，依次延迟触发缓慢循环跳动（波浪效果） */
+    function animateJump() {
+      var chars = fullText.split("");
+      titleEl.textContent = "";
+      for (var i = 0; i < chars.length; i++) {
+        var s = document.createElement("span");
+        s.className = "jump-char";
+        s.style.animationDelay = i * 90 + "ms";
+        s.textContent = chars[i];
+        titleEl.appendChild(s);
+      }
+      titleEl.appendChild(caret);
+      titleEl.classList.add("jump");
+    }
+
     var timer = setInterval(function () {
       typed += 1;
       titleEl.textContent = fullText.slice(0, typed);
       titleEl.appendChild(caret);
-      if (typed >= fullText.length) clearInterval(timer);
+      if (typed >= fullText.length) {
+        clearInterval(timer);
+        animateJump();
+      }
     }, 320);
   }
 
