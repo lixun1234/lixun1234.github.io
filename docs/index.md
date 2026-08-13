@@ -18,7 +18,7 @@ hide:
   <p class="home-sub sub-2">岁岁年年，万喜万般宜</p>
 
   <!-- 按钮：点击后平滑滚动到下方寄语模块 -->
-  <a class="home-enter" href="#message">查看寄语</a>
+  <a class="home-enter" href="#message">点这里</a>
 
 </div>
 

@@ -101,9 +101,17 @@ body {
   }
 }
 
-/* 打字完成后的缓慢循环跳动：每个字轻轻起伏，依次错开形成波浪 */
-.home-title.jump .jump-char {
+/* 打字机的字：从一开始就占用最终位置、默认隐藏，由 JS 逐个显现；
+   字间距改用 margin 控制，打字全程与完成后完全一致，避免间距跳变 */
+.home-title .jump-char {
   display: inline-block;
+  margin-right: 0.3em;
+  visibility: hidden;
+}
+
+/* 打字完成后：每个字依次延迟触发缓慢循环跳动（波浪效果） */
+.home-title.jump .jump-char {
+  visibility: visible;
   animation: char-jump 2.2s ease-in-out infinite;
 }
 
@@ -193,39 +201,58 @@ body {
 }
 
 /* ============================================================
-   寄语模块：一屏高度，完整显示背景图
-   ※ 背景图替换位置：下方 ::before 与 ::after 两处 url() 都要改，
+   换页动画：淡出 + 轻微缩小，淡入 + 轻微放大
+   ============================================================ */
+.page-fade-out {
+  animation: page-fade-out 0.45s ease forwards;
+}
+
+@keyframes page-fade-out {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+}
+
+.page-fade-in {
+  animation: page-fade-in 0.45s ease forwards;
+}
+
+@keyframes page-fade-in {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ============================================================
+   寄语模块：一屏高度，完整显示一张背景图
+   ※ 背景图替换位置：下方 .message-section::after 的 url()，
      把 "../images/letter/0815.jpg" 换成你自己的图片路径即可
-     （支持 jpg / png / svg，任意比例都可以）
-     ::before = 模糊铺底（自动填满两侧空白，让图片无缝融入页面）
-     ::after  = 完整原图（contain 不裁切、居中显示）
+     （支持 jpg / png / svg，任意比例都可以，居中完整显示不裁切）
    ============================================================ */
 .message-section {
   position: relative;
   box-sizing: border-box;
+  display: none;
   min-height: 100vh;
   min-height: 100svh;
-  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 5rem 1.5rem 4rem;
-  overflow: hidden;
   background-color: #f7efe9;
 }
 
-/* ↓↓↓↓ 背景图替换位置①：模糊铺底层（复制粘贴成你的图片路径） ↓↓↓↓ */
-.message-section::before {
-  content: "";
-  position: absolute;
-  inset: -2.5rem;
-  z-index: 0;
-  pointer-events: none;
-  background: url("../images/letter/0815.jpg") center / cover no-repeat;
-  filter: blur(24px);
-}
-
-/* ↓↓↓↓ 背景图替换位置②：完整原图层（复制粘贴成你的图片路径） ↓↓↓↓ */
+/* ↓↓↓↓ 背景图替换位置：完整原图（contain 不裁切、居中显示） ↓↓↓↓ */
 .message-section::after {
   content: "";
   position: absolute;
